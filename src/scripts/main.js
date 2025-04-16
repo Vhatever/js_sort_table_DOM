@@ -2,10 +2,11 @@
 
 // write code here
 const table = document.querySelector('table');
+const tbody = table.querySelector('tbody');
 
 table.querySelectorAll('th').forEach((th, columnIndex) => {
   th.addEventListener('click', () => {
-    const rows = Array.from(table.querySelector('tbody').rows);
+    const rows = Array.from(tbody.rows);
 
     rows.sort((rowA, rowB) => {
       const cellA = rowA.cells[columnIndex].textContent.trim();
@@ -17,9 +18,6 @@ table.querySelectorAll('th').forEach((th, columnIndex) => {
       return a > b ? 1 : -1;
     });
 
-    const tbody = table.querySelector('tbody');
-
-    tbody.innerHTML = '';
-    rows.forEach((row) => tbody.appendChild(row));
+    tbody.append(...rows);
   });
 });
